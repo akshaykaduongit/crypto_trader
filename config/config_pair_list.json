@@ -1,0 +1,263 @@
+{
+  "bots": [
+    {
+      "type": "MA",
+      "base_symbol": "XLM",
+      "quote_symbol": "EUR",
+      "interval": "30m",
+      "initial_amount": 100,
+      "stop_loss": 3,
+      "take_profit": 1,
+      "trailing_stop_loss": 0.5,
+      "is_active": "true"
+    },
+    {
+      "type": "MA",
+      "base_symbol": "XRP",
+      "quote_symbol": "EUR",
+      "interval": "30m",
+      "initial_amount": 100,
+      "stop_loss": 3,
+      "take_profit": 1.5,
+      "trailing_stop_loss": 0.5,
+      "is_active": "true"
+    },
+    {
+      "type": "MA",
+      "base_symbol": "LTC",
+      "quote_symbol": "EUR",
+      "interval": "30m",
+      "initial_amount": 100,
+      "stop_loss": 3,
+      "take_profit": 1.5,
+      "trailing_stop_loss": 0.5,
+      "is_active": "true"
+    },
+    {
+      "type": "MA",
+      "base_symbol": "LINK",
+      "quote_symbol": "EUR",
+      "interval": "30m",
+      "initial_amount": 100,
+      "stop_loss": 3,
+      "take_profit": 1.5,
+      "trailing_stop_loss": 0.5,
+      "is_active": "true"
+    },
+    {
+      "type": "MA",
+      "base_symbol": "DOT",
+      "quote_symbol": "EUR",
+      "interval": "30m",
+      "initial_amount": 100,
+      "stop_loss": 3,
+      "take_profit": 1.5,
+      "trailing_stop_loss": 0.5,
+      "is_active": "true"
+    },
+    {
+      "type": "MA",
+      "base_symbol": "SXP",
+      "quote_symbol": "EUR",
+      "interval": "30m",
+      "initial_amount": 100,
+      "stop_loss": 3,
+      "take_profit": 1.5,
+      "trailing_stop_loss": 0.5,
+      "is_active": "true"
+    },
+    {
+      "type": "MA",
+      "base_symbol": "BTC",
+      "quote_symbol": "EUR",
+      "interval": "30m",
+      "initial_amount": 100,
+      "stop_loss": 3,
+      "take_profit": 1.5,
+      "trailing_stop_loss": 0.5,
+      "is_active": "true"
+    },
+    {
+      "type": "MA",
+      "base_symbol": "ADA",
+      "quote_symbol": "EUR",
+      "interval": "30m",
+      "initial_amount": 100,
+      "stop_loss": 3,
+      "take_profit": 1.5,
+      "trailing_stop_loss": 0.5,
+      "is_active": "true"
+    },
+    {
+      "type": "MA",
+      "base_symbol": "BCH",
+      "quote_symbol": "EUR",
+      "interval": "30m",
+      "initial_amount": 100,
+      "stop_loss": 3,
+      "take_profit": 1.5,
+      "trailing_stop_loss": 0.5,
+      "is_active": "true"
+    },
+    {
+      "type": "MA",
+      "base_symbol": "YFI",
+      "quote_symbol": "EUR",
+      "interval": "30m",
+      "initial_amount": 100,
+      "stop_loss": 3,
+      "take_profit": 1.5,
+      "trailing_stop_loss": 0.5,
+      "is_active": "true"
+    },
+    {
+      "type": "MA",
+      "base_symbol": "ETH",
+      "quote_symbol": "EUR",
+      "interval": "30m",
+      "initial_amount": 100,
+      "stop_loss": 3,
+      "take_profit": 1.5,
+      "trailing_stop_loss": 0.5,
+      "is_active": "true"
+    }
+
+,
+
+    {
+      "type": "STDEV",
+      "base_symbol": "XLM",
+      "quote_symbol": "EUR",
+      "interval": "30m",
+      "initial_amount": 80,
+      "stop_loss": 3,
+      "take_profit": 1,
+      "trailing_stop_loss": 0.5,
+      "is_active": "true"
+    },
+    {
+      "type": "STDEV",
+      "base_symbol": "XRP",
+      "quote_symbol": "EUR",
+      "interval": "30m",
+      "initial_amount": 80,
+      "stop_loss": 3,
+      "take_profit": 1.5,
+      "trailing_stop_loss": 0.5,
+      "is_active": "true"
+    },
+    {
+      "type": "STDEV",
+      "base_symbol": "LTC",
+      "quote_symbol": "EUR",
+      "interval": "30m",
+      "initial_amount": 80,
+      "stop_loss": 3,
+      "take_profit": 1.5,
+      "trailing_stop_loss": 0.5,
+      "is_active": "true"
+    },
+    {
+      "type": "STDEV",
+      "base_symbol": "LINK",
+      "quote_symbol": "EUR",
+      "interval": "30m",
+      "initial_amount": 80,
+      "stop_loss": 3,
+      "take_profit": 1.5,
+      "trailing_stop_loss": 0.5,
+      "is_active": "true"
+    },
+    {
+      "type": "STDEV",
+      "base_symbol": "DOT",
+      "quote_symbol": "EUR",
+      "interval": "30m",
+      "initial_amount": 80,
+      "stop_loss": 3,
+      "take_profit": 1.5,
+      "trailing_stop_loss": 0.5,
+      "is_active": "true"
+    },
+    {
+      "type": "STDEV",
+      "base_symbol": "SXP",
+      "quote_symbol": "EUR",
+      "interval": "30m",
+      "initial_amount": 80,
+      "stop_loss": 3,
+      "take_profit": 1.5,
+      "trailing_stop_loss": 0.5,
+      "is_active": "true"
+    },
+    {
+      "type": "STDEV",
+      "base_symbol": "BTC",
+      "quote_symbol": "EUR",
+      "interval": "30m",
+      "initial_amount":  80,
+      "stop_loss": 3,
+      "take_profit": 1.5,
+      "trailing_stop_loss": 0.5,
+      "is_active": "true"
+    },
+    {
+      "type": "STDEV",
+      "base_symbol": "ADA",
+      "quote_symbol": "EUR",
+      "interval": "30m",
+      "initial_amount": 80,
+      "stop_loss": 3,
+      "take_profit": 1.5,
+      "trailing_stop_loss": 0.5,
+      "is_active": "true"
+    },
+    {
+      "type": "STDEV",
+      "base_symbol": "BCH",
+      "quote_symbol": "EUR",
+      "interval": "30m",
+      "initial_amount": 80,
+      "stop_loss": 3,
+      "take_profit": 1.5,
+      "trailing_stop_loss": 0.5,
+      "is_active": "true"
+    },
+    {
+      "type": "STDEV",
+      "base_symbol": "YFI",
+      "quote_symbol": "EUR",
+      "interval": "30m",
+      "initial_amount": 80,
+      "stop_loss": 3,
+      "take_profit": 1.5,
+      "trailing_stop_loss": 0.5,
+      "is_active": "true"
+    },
+    {
+      "type": "STDEV",
+      "base_symbol": "ETH",
+      "quote_symbol": "EUR",
+      "interval": "30m",
+      "initial_amount": 80,
+      "stop_loss": 3,
+      "take_profit": 1.5,
+      "trailing_stop_loss": 0.5,
+      "is_active": "true"
+    }
+
+,
+    {
+      "type": "MFI",
+      "base_symbol": "BTC",
+      "quote_symbol": "EUR",
+      "interval": "30m",
+      "initial_amount": 80,
+      "stop_loss": 3,
+      "take_profit": 1.5,
+      "trailing_stop_loss": 0.5,
+      "is_active": "true"
+    }
+
+  ]
+}

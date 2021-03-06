@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="refresh" content="3600">
+    <style>
+    body{font-size:1em;}
+
+    #heart_beat {border: 1px solid black ;border-collapse: collapse;}
+    #heart_beat td{border: 1px solid black;padding: 2px;}
+    #heart_beat th{font-weight: bold;border: 1px solid black;background-color: grey;padding: 2px;}
+    #heart_beat .SEARCHING{
+        background-color: dodgerblue
+        }
+    #heart_beat .BUY_WATCH{
+        background-color: orange
+        }
+    #heart_beat .OPEN{
+        background-color: Tomato
+        }
+    .content-ot table{
+        border: 1px solid black;
+        border-collapse: collapse;
+        }
+    .content-ot th,td {padding: 5px; text-align: left;border: 1px solid black;}
+
+    //.content-one{display:none;}
+
+    .OVERSOLD{background-color:MediumSeaGreen}
+    .NORMAL_LOW{background-color:DodgerBlue}
+    .NORMAL_HIGH{background-color:Orange}
+    .OVERBOUGHT{background-color:Tomato}
+    </style>
+    <script src="jquery-3.5.1.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Bot summary</title>
+</head>
+<body>
+<script>
+
+    function loadPortfolio(){
+    $.getJSON("../Database/mfi_signals.json", function(json) {
+    console.log(json);                                             // this will show the info it in firebug console
+    var quote_Asset = ""
+    var base_Asset = ""
+    var interval = ""
+
+    var arrSIG = json.mfi_values
+    var arrAlerts = json.alerts
+    console.log(arrSIG);
+    $("#div_signals").empty()
+    $("#div_alerts").empty()
+    var str_tr = ""
+    str_tr = str_tr + "<p>"+json.update_time+"</p>"
+    str_tr = str_tr + "<table id=\"mfi\">"
+    str_tr = str_tr + "<tr><th>quote symbol</th><th>base symbol</th><th>30m</th><th></th><th>1h</th><th></th><th>4h</th><th></th><th>12h</th><th></th><th>1d</th><th></th><th>1w</th><th></th><th>Rank</th><th>Score</th></tr>"
+
+    $.each(arrSIG, function(key,value) {
+        var score = 0;
+        console.log(key)
+        quote_asset = key
+        $.each(value, function(k,v){
+            base_Asset = k
+            console.log(v)
+
+            str_tr = str_tr + "<tr>"
+
+                str_tr = str_tr + "<td>"+quote_asset+"</td>"
+                str_tr = str_tr + "<td>"+base_Asset+"</td>"
+                str_tr = str_tr + "<td class = \""+getClass(v.interval_30m.mfi)+"\" >"+v.interval_30m.mfi+"</td>"
+                str_tr = str_tr + "<td class = \""+getClassSTDEV(v.interval_30m.standad_deviation)+"\" >"+v.interval_30m.standad_deviation+"</td>"
+
+                str_tr = str_tr + "<td class = \""+getClass(v.interval_1h.mfi)+"\" >"+v.interval_1h.mfi+"</td>"
+                str_tr = str_tr + "<td class = \""+getClassSTDEV(v.interval_1h.standad_deviation)+"\" >"+v.interval_1h.standad_deviation+"</td>"
+
+                str_tr = str_tr + "<td class = \""+getClass(v.interval_4h.mfi)+"\" >"+v.interval_4h.mfi+"</td>"
+                str_tr = str_tr + "<td class = \""+getClassSTDEV(v.interval_4h.standad_deviation)+"\" >"+v.interval_4h.standad_deviation+"</td>"
+
+                str_tr = str_tr + "<td class = \""+getClass(v.interval_12h.mfi)+"\" >"+v.interval_12h.mfi+"</td>"
+                str_tr = str_tr + "<td class = \""+getClassSTDEV(v.interval_12h.standad_deviation)+"\" >"+v.interval_12h.standad_deviation+"</td>"
+
+                str_tr = str_tr + "<td class = \""+getClass(v.interval_1d.mfi)+"\" >"+v.interval_1d.mfi+"</td>"
+                str_tr = str_tr + "<td class = \""+getClassSTDEV(v.interval_1d.standad_deviation)+"\" >"+v.interval_1d.standad_deviation+"</td>"
+
+                str_tr = str_tr + "<td class = \""+getClass(v.interval_1w.mfi)+"\" >"+v.interval_1w.mfi+"</td>"
+                str_tr = str_tr + "<td class = \""+getClassSTDEV(v.interval_1w.standad_deviation)+"\" >"+v.interval_1w.standad_deviation+"</td>"
+
+                str_tr = str_tr + "<td >"+v.market_cap_rank+"</td>"
+                score = 0
+                score = score + getMFIScore(v.interval_30m.mfi)+ getMFIScore(v.interval_1h.mfi)+ getMFIScore(v.interval_4h.mfi)+ getMFIScore(v.interval_12h.mfi)+ getMFIScore(v.interval_1d.mfi)
+                score = score + getSTDEVScore(v.interval_30m.standad_deviation)+ getSTDEVScore(v.interval_1h.standad_deviation)+ getSTDEVScore(v.interval_4h.standad_deviation)+ getSTDEVScore(v.interval_12h.standad_deviation)+ getSTDEVScore(v.interval_1d.standad_deviation)
+                str_tr = str_tr + "<td >"+score+"</td>"
+            str_tr = str_tr + "</tr>"
+
+            });
+    });
+    str_tr = str_tr + "</table>"
+    $("#div_signals").append(str_tr)
+
+    str_tr = "<table>"
+    $.each(arrAlerts, function(key,value) {
+        str_tr = str_tr +"<tr>"
+        str_tr = str_tr + "<td>"+key+"</td>"
+        str_tr = str_tr + "<td>"+JSON.stringify(value)+"</td>"
+
+        str_tr = str_tr +"</tr>"
+        });
+    str_tr = str_tr + "</table>";
+    $("#div_alerts").append(str_tr)
+
+  });
+
+
+
+}
+
+function getClass(mfi){
+    if (mfi<20){return "OVERSOLD";}
+    if (mfi>=20 && mfi <=50 ){return "NORMAL_LOW";}
+    if (mfi>50 && mfi <=80 ){return "NORMAL_HIGH";}
+    if (mfi>80 ){return "OVERBOUGHT";}
+    }
+
+function getMFIScore(mfi){
+    if (mfi<20){return 3;}
+    if (mfi>=20 && mfi <=50 ){return 1;}
+    if (mfi>50 && mfi <=80 ){return 0;}
+    if (mfi>80 ){return -1;}
+    }
+
+function getSTDEVScore(stdev){
+    if (stdev>2.25){return 3;}
+    if (stdev<=2.25 && stdev > 0 ){return 1;}
+    if (stdev <0 && stdev >= -2.25 ){return 0;}
+    if (stdev< -2.25 ){return -1;}
+    }
+
+function getClassSTDEV(stdev){
+    if (stdev>2.25){return "OVERSOLD";}
+    if (stdev<=2.25 && stdev > 0 ){return "NORMAL_LOW";}
+    if (stdev <0 && stdev >= -2.25 ){return "NORMAL_HIGH";}
+    if (stdev< -2.25 ){return "OVERBOUGHT";}
+    }
+
+    loadPortfolio()
+    var myVar = setInterval(loadPortfolio, 1000*60);
+
+</script>
+
+<div id = "expand_signals"   class="expand-one"><a href="#">Expand/collapse</a></div>
+<div id="div_signals" class="content-one"></div>
+<div id="div_alerts" ></div>
+
+<script>
+        $('.expand-one').click(function(){
+    $('.content-one').slideToggle('slow');
+    });
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+
+    #heart_beat td{border: 1px solid grey;}
+    #heart_beat .SEARCHING{
+    background-color: LightGrey
+    }
+    #heart_beat .OPEN{
+    background-color: DarkSeaGreen
+    }
+    #heart_beat .LOSS{
+    background-color: LightCoral
+    }
+    #heart_beat .PROFIT{
+    background-color: DarkSeaGreen
+    }
+
+    .summary, .summary td{border: 1px solid grey;}
+
+    .content-one{display:none;}
+    </style>
+    <script src="jquery-3.5.1.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    function loadPortfolio(){
+    $.getJSON("../Database/bot_summary.json", function(json) {
+        console.log(json); // this will show the info it in firebug console
+        //alert(json.available_amount)
+        var arrHB = json.bot_list
+
+        $("#heart_beat").remove();
+        var str_tr = ""
+        str_tr = str_tr + "<table id=\"heart_beat\">"
+        str_tr = str_tr + "<tr><td>Bot</td><td>Status</td><td>Initial Amount</td><td>Current amount</td><td>type</td></tr>"
+        str_tr = str_tr + "</table>"
+
+        $("#div_heart_beat").append(str_tr)
+        var total_loss = 0.0
+        var total_profit = 0.0
+        $.each(arrHB, function(key,value) {
+                console.log(key);
+                console.log(value.status);
+                var class_current_amount = ""
+                if( value.status == "SEARCHING" && value.initial_amount > value.current_amount){
+                    class_current_amount = "LOSS"
+                    total_loss = total_loss + value.initial_amount - value.current_amount
+                    }
+                if( value.status == "SEARCHING" && value.initial_amount < value.current_amount){
+                    class_current_amount = "PROFIT"
+                    total_profit = total_profit + value.current_amount - value.initial_amount
+                    }
+
+                str_tr = ""
+                str_tr = str_tr + "<tr>"
+                str_tr = str_tr + "<td>"+key+"</td>"
+                str_tr = str_tr + "<td class=\""+value.status+"\">"+value.status+"</td>"
+                str_tr = str_tr + "<td>"+value.initial_amount+"</td>"
+                str_tr = str_tr + "<td class =\""+class_current_amount+"\">"+value.current_amount+"</td>"
+                str_tr = str_tr + "<td>"+value.type+"</td>"
+                str_tr = str_tr + "</tr>"
+
+                $("#heart_beat").append(str_tr)
+                }) // end of loop
+           str_summary = "<div>"
+           str_summary = str_summary + "<table class = \"summary\"><tr><td>Total Profit</td><td>Total loss</td></tr>"
+           str_summary = str_summary + "<tr>"
+           str_summary = str_summary + "<td>" + total_profit + "</td>"
+           str_summary = str_summary + "<td>"+total_loss+"</td>"
+           str_summary = str_summary + "</tr></table>"
+           str_summary = str_summary + "</div>"
+
+           $("#summary").children().remove()
+           $("#summary").append(str_summary)
+
+
+           }); // end of getJSON
+
+
+
+    }
+
+    loadPortfolio()
+    var myVar = setInterval(loadPortfolio, 1000*10);
+
+
+
+
+
+</script>
+<div id="summary"></div>
+<div id = "expand_heart_beat"   class="expand-one"><a href="#">Expand/collapse</a></div>
+<div id="div_heart_beat" class="content-one"></div>
+
+<script>
+        $('.expand-one').click(function(){
+    $('.content-one').slideToggle('slow');
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+{
+  "end_points": {
+    "base": "https://api.binance.com",
+    "api_exchange_info": "/api/v3/exchangeInfo",
+    "klines_candles": "/api/v3/klines",
+    "server_time": "/api/v3/time",
+    "average_price": "/api/v3/ticker/price"
+  },
+  "download_paths": {
+    "exchange_info": "Database/download/exchange_info.json",
+    "symbols_info": "Database/download/symbols_info.json",
+    "kline_candles": "Database/download/candles/{interval}.json"
+  },
+  "refresh_intervals": {
+    "exchange_info": 3600,
+    "candle_list_30m": 60,
+    "candle_list_1h": 900,
+    "candle_list_4h": 1800,
+    "candle_list_12h": 3600,
+    "candle_list_1d": 3600,
+    "candle_list_1w": 14400
+  },
+  "active_quote_assets": {
+    "BTC": "active",
+    "EUR": "active",
+    "BNB": "active"
+  }
+}
